@@ -21,6 +21,11 @@ app = Flask(__name__)
 model = None
 prev_image_array = None
 
+MAX_SPEED = -25.0
+MIN_SPEED = 20
+
+speed_limit = MAX_SPEED
+
 
 class SimplePIController:
     def __init__(self, Kp, Ki):
@@ -44,7 +49,7 @@ class SimplePIController:
 
 
 controller = SimplePIController(0.1, 0.002)
-set_speed = 9
+set_speed = 11
 controller.set_desired(set_speed)
 
 
@@ -63,7 +68,7 @@ def telemetry(sid, data):
         image_array = np.asarray(image)
         steering_angle = float(model.predict(image_array[None, :, :, :], batch_size=1))
 
-        throttle = controller.update(float(speed))
+        throttle = controller.update(float(speed) * 0.5)
 
         print(steering_angle, throttle)
         send_control(steering_angle, throttle)
