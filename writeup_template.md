@@ -112,7 +112,7 @@ To augment the data sat, I also flipped images and angles thinking that this wou
 
 I also used the cameras on the left and right side of the car as training examples, except I replaced their recorded steering angle with one that indicated the correction the car should make to correct from its incorrect course. I experimented with different correction angles to come to the one in my code which gave the best results (model.py 19).
 
-After the collection process, I had 106722 data points. I didn't do any pre-processing of the data other than the normalizing, mean centering and cropping that occured in the keras model.
+After the collection process, I had 106722 data points. I didn't do any pre-processing of the data other than the normalizing, mean centering and cropping that occured in the keras model. I also changed the colorspace from BGR to RGB to counteract the way OpenCV reads images.
 
 To improve performance I only stored the textual information describing the training data, along with a parameter to determine if the image was to be flipped. Later during training a generator would be called for each batch and only at that time would the image actually be read into memory and processed to flip if appropriate.
 
