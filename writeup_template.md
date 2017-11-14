@@ -108,7 +108,7 @@ I then recorded the vehicle recovering from the left side and right sides of the
 
 Then I repeated this process on track two in order to get more data points.
 
-To augment the data sat, I also flipped images and angles thinking that this would provide more training data with less manual collection.
+To augment the data sat, I also flipped images and angles thinking that this would provide more training data with less manual collection. I also assumed that track one had a strong bias to turning left and flipping the images would help the net generalise to turning in both directions.
 
 I also used the cameras on the left and right side of the car as training examples, except I replaced their recorded steering angle with one that indicated the correction the car should make to correct from its incorrect course. I experimented with different correction angles to come to the one in my code which gave the best results (model.py 19).
 
