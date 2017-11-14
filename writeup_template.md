@@ -40,7 +40,7 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+My model consists of a convolution neural network described below and in model.py lines 91-113
 
 The model includes ELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 93). I used the ELU activation rather than RELU based on advise from my reviewer after the traffic signs project. Apparently it's faster.
 
