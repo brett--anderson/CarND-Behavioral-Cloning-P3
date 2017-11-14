@@ -82,10 +82,10 @@ At the end of the process, the vehicle is able to drive autonomously around the 
 
 The final model architecture (model.py lines 93-113) consisted of a convolution neural network with the following layers and layer sizes
 
--Data normalization node to project data into \[-1, 1] range with mean centered at 0
--Image cropping node to remove parts of the image that are not useful for driving (sky etc)
--Added a 1x1x3 convolution with a linear activate to try and learn the best colorspace. I read about this in a medium post discussing the traffic signs project.
--Following are layers taken from the nVidia model, the back to back convolution nets add plenty of non linearity to the model
+- Data normalization node to project data into \[-1, 1] range with mean centered at 0
+- Image cropping node to remove parts of the image that are not useful for driving (sky etc)
+- Added a 1x1x3 convolution with a linear activate to try and learn the best colorspace. I read about this in a medium post discussing the traffic signs project.
+- Following are layers taken from the nVidia model, the back to back convolution nets add plenty of non linearity to the model
 - Convolution 5x5x24, subsample=(2,2), elu activation
 - Convolution 5x5x36, subsample=(2,2), elu activation
 - Convolution 5x5x48, subsample=(2,2), elu activation
@@ -121,3 +121,11 @@ I finally randomly shuffled the data set and put 0.2% of the data into a validat
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. The ideal number of epochs was 15 as evidenced by the MSE loss of the training and validation data converging and leveling out as seen below. I also included an automatic early stopping component in the network but I found if I let it train for that many epochs the model overfitted and didn't generalize well. I used an adam optimizer so that manually training the learning rate wasn't necessary.
 
 ![MSE][image1]
+
+#### 4. Next Time Gadget
+
+I had worked on the entire project with the graphics turned right down. After sucessfully getting the car to autonomously drive both tracks I tried turning the graphics up only to realise this added shadows! My net was still able to navigate the first track and I've included the video with those graphics turned on. However it now failed on the second track, so I've included a video of it driving on the second track with basic graphics and no shadows. Unfortunately I'm out of time but I'll revist this to make it work with shadows. Since I couldn't be bothered collecting all the training data again, I'd like to try augmenting the existing data with a shadow generater and training from that to see how things go.
+
+I also implemented the automatic colorspace learning layer but didn't get around to comparing it with other manually selected spaces. This probably isn't the project for that anyway since the accuracy is a little subjective. I might go back to my traffic sign project and see how the colorspace learning layer compares with the one I manually selected.
+
+I also spent a lot of time waiting to retrain the entire network after adding a few extra seconds of training data to deal with some particularly nasty spots. Next time I would try loading the existing net and just retraining some or all of the network for the new data only to save time.
